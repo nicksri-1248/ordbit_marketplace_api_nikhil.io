@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ form.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="delivery_date">Delivery Date:</label>
+        <input type="date" name="delivery_date" value="{{ order.delivery_date }}">
+        <label for="delivery_time">Delivery Time:</label>
+        <input type="time" name="delivery_time" value="{{ order.delivery_time }}">
+        <button type="submit" class="btn btn-success">Next</button>
+    </form>
+{% endblock %}

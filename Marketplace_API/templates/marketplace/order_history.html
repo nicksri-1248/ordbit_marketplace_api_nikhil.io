@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Order History
+{% endblock %}
+
+{% block content %}
+    <h1>Order History</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                {% if order.order_number %}
+                    <tr>
+                        <td><a href="{% url 'order_detail' order.order_number %}">{{ order.order_number }}</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

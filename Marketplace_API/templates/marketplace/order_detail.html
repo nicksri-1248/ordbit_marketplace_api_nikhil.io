@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>ID - #{{ order_number }}</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Date Ordered</th>
+        <th>Total Cost</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+        <tr>
+          <td>{{ order.product.name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.product.price }}</td>
+          <td>{{ order.date_ordered }}</td>
+          <td>{{ order.total_product_cost }}</td>
+          {% csrf_token %}
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">No orders found</td>
+        </tr>
+      {% endfor %}
+      {% if orders %}
+        <tr>
+          <td colspan="3"></td>
+          <td><strong>Total:</strong></td>
+          <td><strong>{{ total_cost }}</strong></td>
+          <td></td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+{% endblock %}

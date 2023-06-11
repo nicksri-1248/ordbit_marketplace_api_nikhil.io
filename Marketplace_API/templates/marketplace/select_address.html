@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Select Address</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for address in addresses %}
+      {% if address.address %}
+        <div>
+          <input type="radio" id="{{ address.id }}" name="selected_address" value="{{ address.address }}">
+          <label for="{{ address.id }}">{{ address.address }}</label>
+        </div>
+      {% endif %}
+    {% empty %}
+      <p>No addresses found.</p>
+    {% endfor %}
+    <button type="submit" name="name_and_address" value="name_and_address" class="btn btn-success">Add New address</button>
+    <button type="submit" name="delivery_date_and_time" value="delivery_date_and_time" class="btn btn-success">Proceed to delivery date and time</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Quantity{% endblock %}
+
+{% block content %}
+    <h1>Update Quantity</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-outline-secondary" data-quantity-action="minus">-</button>
+                </div>
+                {{ form.quantity }}
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-quantity-action="plus">+</button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{% url 'quantity_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            var quantityInput = $('input[name="quantity"]');
+            $('button[data-quantity-action]').click(function() {
+                var action = $(this).data('quantity-action');
+                var currentValue = parseInt(quantityInput.val()) || 0;
+                var newValue = currentValue + (action === 'plus' ? 1 : -1);
+                quantityInput.val(newValue >= 0 ? newValue : 0);
+            });
+        });
+    </script>
+{% endblock %}

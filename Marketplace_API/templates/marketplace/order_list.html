@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Product List</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+              <input type="number" name="product" value="0" min="0" max="product.quantity">
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">Place Order</button>
+  </form>
+
+{% endblock %}

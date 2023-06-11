@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price }}</p>
+    <a href="{% url 'product_update' product.pk %}" class="btn btn-primary">Edit</a>
+    <form method="post" action="{% url 'product_delete' product.pk %}" style="display: inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+    </form>
+{% endblock %}
