@@ -22,7 +22,7 @@ A list of technologies used within the project:
 A little intro about the installation. 
 ```
 $ git clone https://github.com/nicksri-1248/ordbit_marketplace_api_nikhil.io.git
-$ cd ../Ordbit
+$ cd ../ordbit_marketplace_api_nikhil
 $ env/Scripts/activate.bat
 $ pip install django
 $ cd Marketplace_API
